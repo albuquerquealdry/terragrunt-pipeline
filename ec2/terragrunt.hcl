@@ -1,6 +1,6 @@
 
 terraform {
-  source = "git::github.com:albuquerquealdry/terraform-terragrunt-aws.git//terraform-modules/aws/ec2/?ref=main"
+  source = "git::https://github.com/albuquerquealdry/terraform-terragrunt-aws.git//terraform-modules/aws/ec2/?ref=main"
 }
 
 
