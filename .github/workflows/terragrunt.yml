@@ -51,13 +51,17 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
   deploy:
+    
     name: 'Deploy Terragrunt'
     runs-on: ubuntu-latest
-    steps: 
+    steps:
+    - uses: trstringer/manual-approval@v1
+      with:
+        secret: ${{ github.TOKEN }}
+        approvers: albuquerquealdry
     - name: 'Terragrunt Apply'
       uses: the-commons-project/terragrunt-github-actions@master
       with:
-          approvers: albuquerquealdry
           tf_actions_version: ${{ env.tf_version }}
           tg_actions_version: ${{ env.tg_version }}
           tf_actions_subcommand: 'apply'
