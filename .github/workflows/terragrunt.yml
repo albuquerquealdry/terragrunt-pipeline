@@ -61,7 +61,7 @@ jobs:
     steps:
     - uses: trstringer/manual-approval@v1
       with:
-        secret: ${{ github.TOKEN }}
+        secret: ${{ secrets.GITHUB_TOKEN }}
         approvers: albuquerquealdry
     - name: 'Terragrunt Apply'
       uses: the-commons-project/terragrunt-github-actions@master
