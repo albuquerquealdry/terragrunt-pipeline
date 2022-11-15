@@ -59,10 +59,12 @@ jobs:
     name: 'Deploy Terragrunt'
     runs-on: ubuntu-latest
     steps:
-    - uses: trstringer/manual-approval@v1
+    - name: Wait for approval
+      uses: trstringer/manual-approval@v1
       with:
-        secret: ${{ secrets.GITHUB_TOKEN }}
-        approvers: albuquerquealdry
+        secret: ${{ steps.generate_token.outputs.token }}
+        approvers: myteam
+        minimum-approvals: 1
     - name: 'Terragrunt Apply'
       uses: the-commons-project/terragrunt-github-actions@master
       with:
