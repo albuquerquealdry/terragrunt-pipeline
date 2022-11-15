@@ -6,8 +6,8 @@ env:
   tg_version: 'latest'
   tf_working_dir: './ec2'
 jobs:
-  terragrunt:
-    name: 'Terragrunt'
+  prep-and-deps:
+    name: 'Prep Terragrunt'
     runs-on: ubuntu-latest
     steps: 
       - name: Configure AWS credentials
@@ -49,13 +49,20 @@ jobs:
           tf_actions_comment: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: 'Terragrunt Apply'
-        uses: the-commons-project/terragrunt-github-actions@master
-        with:
+      
+  deploy:
+    name: 'Deploy Terragrunt'
+    runs-on: ubuntu-latest
+    steps: 
+    - name: 'Terragrunt Apply'
+      uses: the-commons-project/terragrunt-github-actions@master
+      with:
+          approvers: albuquerquealdry
           tf_actions_version: ${{ env.tf_version }}
           tg_actions_version: ${{ env.tg_version }}
           tf_actions_subcommand: 'apply'
           tf_actions_working_dir: ${{ env.tf_working_dir }}
           tf_actions_comment: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
