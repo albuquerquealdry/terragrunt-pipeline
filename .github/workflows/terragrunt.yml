@@ -1,3 +1,4 @@
+
 name: 'Terragrunt GitHub Actions'
 on:
   pull_request:
@@ -59,12 +60,10 @@ jobs:
     name: 'Deploy Terragrunt'
     runs-on: ubuntu-latest
     steps:
-    - name: Wait for approval
-      uses: trstringer/manual-approval@v1
+    - uses: trstringer/manual-approval@v1
       with:
-        secret: ${{ steps.generate_token.outputs.token }}
-        approvers: myteam
-        minimum-approvals: 1
+        secret: ${{ secrets.GITHUB_TOKEN }}
+        approvers: albuquerquealdry
     - name: 'Terragrunt Apply'
       uses: the-commons-project/terragrunt-github-actions@master
       with:
@@ -75,4 +74,3 @@ jobs:
           tf_actions_comment: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    
