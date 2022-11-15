@@ -1,6 +1,10 @@
 name: 'Terragrunt GitHub Actions'
 on:
-  - push
+  pull_request:
+        branches: 
+          - '*'         # matches every branch that doesn't contain a '/'
+          - '*/*'       # matches every branch containing a single '/'
+          - '**'
 env:
   tf_version: 'latest'
   tg_version: 'latest'
